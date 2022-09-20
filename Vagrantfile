@@ -3,6 +3,8 @@ Vagrant.configure("2") do |config|
   config.vm.box = "alpine"
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
   config.vm.provision :shell, :inline => "cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys", run: "always"
+  config.vm.synced_folder "./spring-app", "/home/vagrant/spring-app", type: "rsync"
+
 
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "300"
